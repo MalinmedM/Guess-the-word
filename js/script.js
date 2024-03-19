@@ -5,7 +5,7 @@ const guessButton = document.querySelector(".guess");
 //The text input where the player will guess a letter
 const textInput = document.querySelector(".letter");
 //The empty paragraph where the word in progress will appear
-const wordAppear = document.querySelector(".word-in-progress");
+const wordInProgress = document.querySelector(".word-in-progress");
 //The paragraph where the remaining guesses will display
 const remainingGuesses = document.querySelector(".remaining");
 //The span inside the paragraph where the remaining guesses will display
@@ -17,3 +17,9 @@ const playAgainButton = document.querySelector(".play-again hide")
 //Starting word to test out the game
 const word = "magnolia";
 
+//Function to Add Placeholders for Each Letter
+const placeholders = function(word){
+
+}
+
+wordInProgress.innerText = "●";
