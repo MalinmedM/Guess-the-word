@@ -19,7 +19,14 @@ const word = "magnolia";
 
 //Function to Add Placeholders for Each Letter
 const placeholders = function(word){
+    //Empty array to be filled with dots
+    const placeholderLetters = [];
+    //for of loop too loop over the word to fill the array
+    for(const letter of word){
+        console.log(letter);
+        placeholderLetters.push("●");
+    }
+    wordInProgress.innerText = placeholderLetters.join("");
+};
 
-}
-
-wordInProgress.innerText = "●";
+placeholders(word);
