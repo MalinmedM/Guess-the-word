@@ -35,7 +35,11 @@ placeholders(word);
 guessButton.addEventListener("click", function(e){
     //Prevents default behaviour of clicking button, form submitting and reloading page
     e.preventDefault();
+    //emptying message element
+    messageAppear.innerText = "";
     const guess = letterInput.value;
+    //making sure its a single letter
+    const goodGuess = validateInput(guess);
     console.log(guess);
     letterInput.value = "";
 });
