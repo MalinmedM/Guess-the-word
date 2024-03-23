@@ -44,6 +44,11 @@ guessButton.addEventListener("click", function(e){
     //making sure its a single letter
     const goodGuess = validateInput(guess);
     console.log(guess);
+    
+    if (goodGuess) {
+        makeGuess(guess)
+    }
+
     letterInput.value = "";
 });
 
@@ -60,5 +65,17 @@ const validateInput = function(input){
         messageAppear.innerText = "Letters only, pleaase."
     } else {
         return input;
+    }
+};
+
+//Function to capture input
+const makeGuess = function(guess) {
+    //converting letter to uppercase
+    guess = guess.toUpperCase();
+    if (guessedLetters.includes(guess)) {
+        messageAppear.innerText = "You have already guessed that letter. Try again!"
+    } else {
+        guessedLetters.push(guess);
+        console.log(guessedLetters);
     }
 };
