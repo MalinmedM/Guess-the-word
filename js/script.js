@@ -9,7 +9,7 @@ const wordInProgress = document.querySelector(".word-in-progress");
 //The paragraph where the remaining guesses will display
 const remainingGuesses = document.querySelector(".remaining");
 //The span inside the paragraph where the remaining guesses will display
-const remainingGuessesSpan = document.querySelector("span");
+const remainingGuessesSpan = document.querySelector(".remaining span");
 //The empty paragraph where messages will appear when the player guesses a letter
 const messageAppear = document.querySelector(".message");
 //The hidden button that will appear prompting the player to play again
@@ -46,7 +46,7 @@ guessButton.addEventListener("click", function(e){
     console.log(guess);
     
     if (goodGuess) {
-        makeGuess(guess)
+        makeGuess(guess);
     }
 
     letterInput.value = "";
@@ -58,11 +58,11 @@ const validateInput = function(input){
     const acceptedLetter = /[a-zA-Z]/;
     //is input empty?
     if (input.length === 0) {
-        messageAppear.innerText = "Try another letter!"
+        messageAppear.innerText = "Try another letter!";
     } else if (input.length > 1) {
-        messageAppear.innerText = "Please only one letter at a time."
+        messageAppear.innerText = "Please only one letter at a time.";
     } else if (!input.match(acceptedLetter)) {
-        messageAppear.innerText = "Letters only, pleaase."
+        messageAppear.innerText = "Letters only, please.";
     } else {
         return input;
     }
@@ -76,6 +76,7 @@ const makeGuess = function(guess) {
         messageAppear.innerText = "You have already guessed that letter. Try again!"
     } else {
         guessedLetters.push(guess);
+        
         console.log(guessedLetters);
         postGuessedLetters();
         wordUpdate(guessedLetters);
@@ -93,6 +94,7 @@ const postGuessedLetters = function(){
     }
 };
 
+//Updates the word in progress
 const wordUpdate = function(guessedLetters){
     const wordUpper = word.toUpperCase();
     //split the word string into an array so that the letter can appear in the guessedLetters array
@@ -106,6 +108,15 @@ const wordUpdate = function(guessedLetters){
             revealWord.push("●");
         }
     }
-    console.log(revealWord);
+    //console.log(revealWord);
     wordInProgress.innerText = revealWord.join("");
+    playerWin();
+};
+
+//Function to Check If the Player Won
+const playerWin = function(){
+    if (word.toUpperCase() === wordInProgress.innerText) {
+        messageAppear.classList.add("win");
+        messageAppear.innerText = `<p class="highlight">You guessed the word! Congrats!</p>`;
+    } 
 };
