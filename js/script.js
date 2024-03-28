@@ -17,7 +17,7 @@ const playAgainButton = document.querySelector(".play-again hide")
 
 //Starting word to test out the game
 const word = "magnolia";
-//Array for containinng all the letters the player guessed
+//Array for containing all the letters the player guessed
 const guessedLetters = [];
 
 //Function to Add Placeholders for Each Letter
@@ -77,5 +77,17 @@ const makeGuess = function(guess) {
     } else {
         guessedLetters.push(guess);
         console.log(guessedLetters);
+        postGuessedLetters();
+    }
+};
+
+const postGuessedLetters = function(){
+    //clear list first
+    guessedLettersList.innerHTML = "";
+    //looping over the array to put guessed letters in it
+    for (const letter of guessedLetters) {
+        const listItem = document.createElement("li");
+        listItem.innerText = letter;
+        guessedLettersList.append(listItem);
     }
 };
