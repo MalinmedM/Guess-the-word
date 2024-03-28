@@ -78,6 +78,7 @@ const makeGuess = function(guess) {
         guessedLetters.push(guess);
         console.log(guessedLetters);
         postGuessedLetters();
+        wordUpdate(guessedLetters);
     }
 };
 
@@ -90,4 +91,21 @@ const postGuessedLetters = function(){
         listItem.innerText = letter;
         guessedLettersList.append(listItem);
     }
+};
+
+const wordUpdate = function(guessedLetters){
+    const wordUpper = word.toUpperCase();
+    //split the word string into an array so that the letter can appear in the guessedLetters array
+    const wordArray = wordUpper.split("");
+    const revealWord = [];
+    //loopar letter över wordArray för att se om den gissade bokstaven finns i word
+    for (const letter of wordArray) {
+        if (guessedLetters.includes(letter)) {
+            revealWord.push(letter.toUpperCase());
+        } else {
+            revealWord.push("●");
+        }
+    }
+    console.log(revealWord);
+    wordInProgress.innerText = revealWord.join("");
 };
