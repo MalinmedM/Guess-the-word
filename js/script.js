@@ -117,6 +117,6 @@ const wordUpdate = function(guessedLetters){
 const playerWin = function(){
     if (word.toUpperCase() === wordInProgress.innerText) {
         messageAppear.classList.add("win");
-        messageAppear.innerText = `<p class="highlight">You guessed the word! Congrats!</p>`;
+        messageAppear.innerHTML = `<p class="highlight">You guessed the word! Congrats!</p>`;
     } 
 };
