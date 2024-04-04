@@ -7,7 +7,7 @@ const letterInput = document.querySelector(".letter");
 //The empty paragraph where the word in progress will appear
 const wordInProgress = document.querySelector(".word-in-progress");
 //The paragraph where the remaining guesses will display
-const remainingGuesses = document.querySelector(".remaining");
+const remainingGuessesElement = document.querySelector(".remaining");
 //The span inside the paragraph where the remaining guesses will display
 const remainingGuessesSpan = document.querySelector(".remaining span");
 //The empty paragraph where messages will appear when the player guesses a letter
@@ -19,6 +19,8 @@ const playAgainButton = document.querySelector(".play-again hide")
 const word = "magnolia";
 //Array for containing all the letters the player guessed
 const guessedLetters = [];
+//Variable for the number of guesses
+let remainingGuesses = 8;
 
 //Function to Add Placeholders for Each Letter
 //explanation of the circles for word: So with your placeholder function, you're first creating an empty array called placeholderLetters . Then your for loop is saying "for every letter that exists in word , I'm going to put in a new circle into the placeholder array. So you're not tampering with the actual word , you're creating a new array and creating a circle every time it loops through a letter from the word and it loops until it goes through each letter then stops! So you end up with the exact amount of circles that existed in the word
@@ -80,6 +82,7 @@ const makeGuess = function(guess) {
         console.log(guessedLetters);
         postGuessedLetters();
         wordUpdate(guessedLetters);
+        guessCounter(guess);
     }
 };
 
@@ -113,10 +116,30 @@ const wordUpdate = function(guessedLetters){
     playerWin();
 };
 
+//Function to count guesses remaining
+const guessCounter = function(guess){
+    const upperWord = word.toUpperCase();
+    if(!upperWord.includes(guess)) {
+        messageAppear.innerText = `Sorry, the word does not contain ${guess}.`;
+        remainingGuesses -= 1;
+    } else {
+        messageAppear.innerText = "You guessed it!"
+    }
+
+    if(remainingGuesses === 0){
+        messageAppear.innerHTML =`Game over! The word was <span class="highlight">${word}</span>. Better luck next time!`;
+    }
+    else if(remainingGuesses === 1){
+        remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
+    } else {
+        remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+    }
+};
+
 //Function to Check If the Player Won
 const playerWin = function(){
     if (word.toUpperCase() === wordInProgress.innerText) {
         messageAppear.classList.add("win");
         messageAppear.innerHTML = `<p class="highlight">You guessed the word! Congrats!</p>`;
-    } 
+    }
 };
