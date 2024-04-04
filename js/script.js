@@ -16,11 +16,23 @@ const messageAppear = document.querySelector(".message");
 const playAgainButton = document.querySelector(".play-again hide")
 
 //Starting word to test out the game
-const word = "magnolia";
+let word = "magnolia";
 //Array for containing all the letters the player guessed
 const guessedLetters = [];
 //Variable for the number of guesses
 let remainingGuesses = 8;
+
+const getWord = async function(){
+    const wordRequest = await fetch (`https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt`);
+    const words = await wordRequest.text();
+    //Seeing the retrieved data: console.log(words);
+    const wordArray = words.split("\n");
+    const randomIndex = Math.floor(Math.random() * words.length);
+    word = wordArray[randomIndex].trim();
+    placeholders(word);
+};
+//Fire off the game: 
+getWord();
 
 //Function to Add Placeholders for Each Letter
 //explanation of the circles for word: So with your placeholder function, you're first creating an empty array called placeholderLetters . Then your for loop is saying "for every letter that exists in word , I'm going to put in a new circle into the placeholder array. So you're not tampering with the actual word , you're creating a new array and creating a circle every time it loops through a letter from the word and it loops until it goes through each letter then stops! So you end up with the exact amount of circles that existed in the word
