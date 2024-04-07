@@ -13,7 +13,7 @@ const remainingGuessesSpan = document.querySelector(".remaining span");
 //The empty paragraph where messages will appear when the player guesses a letter
 const messageAppear = document.querySelector(".message");
 //The hidden button that will appear prompting the player to play again
-const playAgainButton = document.querySelector(".play-again hide")
+const playAgainButton = document.querySelector(".play-again");
 
 //Starting word to test out the game
 let word = "magnolia";
@@ -140,6 +140,7 @@ const guessCounter = function(guess){
 
     if(remainingGuesses === 0){
         messageAppear.innerHTML =`Game over! The word was <span class="highlight">${word}</span>. Better luck next time!`;
+        startOver();
     }
     else if(remainingGuesses === 1){
         remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
@@ -153,5 +154,15 @@ const playerWin = function(){
     if (word.toUpperCase() === wordInProgress.innerText) {
         messageAppear.classList.add("win");
         messageAppear.innerHTML = `<p class="highlight">You guessed the word! Congrats!</p>`;
+        
+        startOver();
     }
+};
+
+//Function to hide and show elements when game is over
+const startOver = function(){
+    guessButton.classList.add("hide");
+    remainingGuessesElement.classList.add("hide");
+    guessedLettersList.classList.add("hide");
+    playAgainButton.classList.remove("hide");
 };
