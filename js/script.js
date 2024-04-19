@@ -54,12 +54,14 @@ guessButton.addEventListener("click", function(e){
     e.preventDefault();
     //emptying message element
     messageAppear.innerText = "";
+    //grabbing what was entered in the input
     const guess = letterInput.value;
     //making sure its a single letter
     const goodGuess = validateInput(guess);
     console.log(guess);
     
     if (goodGuess) {
+        //we've got a letter! Let's guess!
         makeGuess(guess);
     }
 
