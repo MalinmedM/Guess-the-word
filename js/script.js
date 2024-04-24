@@ -47,10 +47,10 @@ const placeholders = function(word){
     wordInProgress.innerText = placeholderLetters.join("");
 };
 
-placeholders(word);
+//Take off when API is in place and call it there instead: placeholders(word);
 
 guessButton.addEventListener("click", function(e){
-    //Prevents default behaviour of clicking button, form submitting and reloading page
+    //Prevents default behaviour of clicking button in browser, form submitting and reloading page
     e.preventDefault();
     //emptying message element
     messageAppear.innerText = "";
@@ -84,7 +84,7 @@ const validateInput = function(input){
     }
 };
 
-//Function to capture input
+//Function to capture input. Guess instead of banana because it will transform to uppercase
 const makeGuess = function(guess) {
     //converting letter to uppercase
     guess = guess.toUpperCase();
@@ -100,10 +100,13 @@ const makeGuess = function(guess) {
     }
 };
 
+//Function to Show guessed letters
+//Test to comment out clear the list!
 const postGuessedLetters = function(){
     //clear list first
     guessedLettersList.innerHTML = "";
     //looping over the array to put guessed letters in it
+    //good its called letter because nnow its a part of the lists and not just the new guess. Guess is just the latest one.
     for (const letter of guessedLetters) {
         const listItem = document.createElement("li");
         listItem.innerText = letter;
@@ -111,22 +114,22 @@ const postGuessedLetters = function(){
     }
 };
 
-//Updates the word in progress
+//Updates the word in progress TOUGH ONE! Q&A!
 const wordUpdate = function(guessedLetters){
     const wordUpper = word.toUpperCase();
-    //split the word string into an array so that the letter can appear in the guessedLetters array
+    //split the word string into an array with split() so that the letter can appear in the guessedLetters array
     const wordArray = wordUpper.split("");
-    const revealWord = [];
+    const realWord = [];
     //loopar letter över wordArray för att se om den gissade bokstaven finns i word
     for (const letter of wordArray) {
         if (guessedLetters.includes(letter)) {
-            revealWord.push(letter.toUpperCase());
+            realWord.push(letter.toUpperCase());
         } else {
-            revealWord.push("●");
+            realWord.push("●");
         }
     }
-    //console.log(revealWord);
-    wordInProgress.innerText = revealWord.join("");
+    //console.log(realWord);
+    wordInProgress.innerText = realWord.join("");
     playerWin();
 };
 
