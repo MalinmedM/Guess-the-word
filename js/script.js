@@ -26,25 +26,29 @@ const getWord = async function(){
     const wordRequest = await fetch ("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
     const words = await wordRequest.text();
     //Seeing the retrieved data: console.log(words);
+    //Transform fetched data to an array. Each word is separated by a newline (line break).
     const wordArray = words.split("\n");
+    //Pull random index from wordArray.
     const randomIndex = Math.floor(Math.random() * wordArray.length);
+    //Pull out random word and remove whitespace
     word = wordArray[randomIndex].trim();
+    
     placeholders(word);
 };
 //Fire off the game: 
 getWord();
 
 //Function to Add Placeholders for Each Letter
-//explanation of the circles for word: So with your placeholder function, you're first creating an empty array called placeholderLetters . Then your for loop is saying "for every letter that exists in word , I'm going to put in a new circle into the placeholder array. So you're not tampering with the actual word , you're creating a new array and creating a circle every time it loops through a letter from the word and it loops until it goes through each letter then stops! So you end up with the exact amount of circles that existed in the word
+//explanation of the circles for word: So with your placeholder function, you're first creating an empty array called "dots". Then your for loop is saying "for every letter that exists in word , I'm going to put in a new dot into the placeholder array. So you're not tampering with the actual word , you're creating a new array and creating a dot every time it loops through a letter from the word and it loops until it goes through each letter then stops! So you end up with the exact amount of dots that existed in the word.
 const placeholders = function(word){
     //Empty array to be filled with dots
-    const placeholderLetters = [];
+    const dots = [];
     //for of to loop over the word to fill the array
     for(const letter of word){
         console.log(letter);
-        placeholderLetters.push("●");
+        dots.push("●");
     }
-    wordInProgress.innerText = placeholderLetters.join("");
+    wordInProgress.innerText = dots.join("");
 };
 
 //Take off when API is in place and call it there instead: placeholders(word);
@@ -119,6 +123,7 @@ const wordUpdate = function(guessedLetters){
     const wordUpper = word.toUpperCase();
     //split the word string into an array with split() so that the letter can appear in the guessedLetters array
     const wordArray = wordUpper.split("");
+    //new array with the updated characters
     const realWord = [];
     //loopar letter över wordArray för att se om den gissade bokstaven finns i word
     for (const letter of wordArray) {
@@ -128,7 +133,7 @@ const wordUpdate = function(guessedLetters){
             realWord.push("●");
         }
     }
-    //console.log(realWord);
+    //Updating the empty paragraph where the word in progress will appear with join()
     wordInProgress.innerText = realWord.join("");
     playerWin();
 };
