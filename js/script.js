@@ -43,7 +43,7 @@ getWord();
 const placeholders = function(word){
     //Empty array to be filled with dots
     const dots = [];
-    //for of to loop over the word to fill the array
+    //for of to loop over the word to fill the array with dots
     for(const letter of word){
         console.log(letter);
         dots.push("●");
